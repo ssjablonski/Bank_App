@@ -5,7 +5,7 @@ from ..Konto import Konto
 class TestCreateBankAccount(unittest.TestCase):
     imie = "Dariusz"
     nazwisko = "Januszewski"
-    pesel = "12345678901"
+    pesel = "02070803628"
 
     def test_tworzenie_konta(self):
         pierwsze_konto = Konto(self.imie, self.nazwisko, self.pesel)
@@ -41,6 +41,40 @@ class TestCreateBankAccount(unittest.TestCase):
     def test_promo_correct(self):
         konto = Konto(self.imie, self.nazwisko, self.pesel, "PROM_123")
         self.assertEqual(konto.saldo, 50, "Promocja nie została naliczona!")
+
+    def test_birthday_pre_1960_correct_promo_valid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "56120774938", "PROM_123")
+        self.assertEqual(konto.saldo, 0,"Osoba urodzona jest przed 1960!")
+
+    def test_birthdat_post_1960_correct_promo_valid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "02070803628", "PROM_123")
+        self.assertEqual(konto.saldo, 50, "Promocja nie została naliczona")
+
+    def test_birthday_pre_1960_correct_promo_invalid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "59121211111", "PROM_123")
+        self.assertEqual(konto.saldo, 0,"Saldo nie jest zerowe!")
+
+    def test_birthdat_post_1960_correct_promo_invalid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "02111111111", "PROM_123")
+        self.assertEqual(konto.saldo, 0, "Saldo nie jest zerowe!")
+
+    def test_birthday_pre_1960_wrong_promo_valid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "56120774938", "_123")
+        self.assertEqual(konto.saldo, 0,"Saldo nie jest zerowe!")
+
+    def test_birthdat_post_1960_wrong_promo_valid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "02111111111", "_123")
+        self.assertEqual(konto.saldo, 0, "Saldo nie jest zerowe!")
+
+    def test_birthday_pre_1960_wrong_promo_invalid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "59121211111", "_123")
+        self.assertEqual(konto.saldo, 0,"Saldo nie jest zerowe!")
+
+    def test_birthdat_post_1960_wrong_promo_invalid_pesel(self):
+        konto = Konto(self.imie, self.nazwisko, "02111111111", "_123")
+        self.assertEqual(konto.saldo, 0, "Saldo nie jest zerowe!")
+
+
 
     
 
