@@ -1,9 +1,11 @@
 from .Konto import Konto
+
 class KontoOsobiste(Konto):
     def __init__(self, imie, nazwisko, pesel, promo_code = None):
         self.imie = imie
         self.nazwisko = nazwisko
         self.saldo = 0
+
         if len(pesel) != 11:
             self.pesel = "Niepoprawny pesel!"
         else:

@@ -49,3 +49,4 @@ class TestTransfer(unittest.TestCase):
         pierwsze_konto.zaksieguj_przelew_przychodzacy(120)
         pierwsze_konto.zaksieguj_przelew_wychodzacy(50)
         self.assertEqual(pierwsze_konto.saldo, 100+120-50, "Saldo nie jest poprawne!")
+    

@@ -10,5 +10,16 @@ class Konto:
         if kwota > 0 and kwota <= self.saldo:
             self.saldo -= kwota
 
+    def zaksieguj_przelew__ekspresowy(self, kwota):
+        if self.NIP:
+            if kwota > 0 and kwota <= self.saldo:
+                self.saldo -= kwota + 5
+        else:
+            if kwota > 0 and kwota <= self.saldo:
+                self.saldo -= kwota + 1
+
+
+
+
 
 
