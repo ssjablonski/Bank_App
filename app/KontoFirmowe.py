@@ -8,8 +8,10 @@ class KontoFirmowe(Konto):
 
         if len(NIP) != 10:
             self.NIP = "Niepoprawny NIP!"
+            
         else:
             self.NIP = NIP
+            self.oplata_za_przelew_ekspresowy = 5
 
 
 
