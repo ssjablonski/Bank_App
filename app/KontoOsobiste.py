@@ -5,11 +5,13 @@ class KontoOsobiste(Konto):
         self.imie = imie
         self.nazwisko = nazwisko
         self.saldo = 0
+        self.historia = []
 
         if len(pesel) != 11:
             self.pesel = "Niepoprawny pesel!"
         else:
             self.pesel = pesel
+            self.oplata_za_przelew_ekspresowy = 1
 
         if self.is_promo_code_correct(promo_code) and self.is_pesel_correct(pesel):
             self.saldo = 50

@@ -5,6 +5,7 @@ class KontoFirmowe(Konto):
         self.nazwa_firmy = nazwa_firmy
         self.NIP = NIP
         self.saldo = 0
+        self.historia = []
 
         if len(NIP) != 10:
             self.NIP = "Niepoprawny NIP!"
