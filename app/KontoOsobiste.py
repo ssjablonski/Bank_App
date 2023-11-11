@@ -43,20 +43,28 @@ class KontoOsobiste(Konto):
         else:
             return False
 
-    def zaciagnij_kredyt(self, kwota):
+    def warunek_3_ostatnie(self):
         last3 = self.historia[-3:]
-        last5 = self.historia[-5:]
         if len(self.historia) < 3:
             self.zgoda_na_kredyt = False
             return False
         elif all(element > 0 for element in last3):
-            self.saldo+=kwota
             self.zgoda_na_kredyt=True
             return True
-        elif len(self.historia) < 5:
+    
+    def warunek_5_ostatnie(self, kwota):
+        last5 = self.historia[-5:]
+        if len(self.historia) < 5:
             self.zgoda_na_kredyt = False
             return False
         elif sum(last5) > kwota:
             self.saldo+= kwota
             self.zgoda_na_kredyt = True
             return True
+
+    def zaciagnij_kredyt(self, kwota):
+        if self.warunek_3_ostatnie() or self.warunek_5_ostatnie(kwota):
+            return True
+        else:
+            return False
+            
