@@ -58,12 +58,13 @@ class KontoOsobiste(Konto):
             self.zgoda_na_kredyt = False
             return False
         elif sum(last5) > kwota:
-            self.saldo+= kwota
             self.zgoda_na_kredyt = True
             return True
 
     def zaciagnij_kredyt(self, kwota):
         if self.warunek_3_ostatnie() or self.warunek_5_ostatnie(kwota):
+            self.saldo+= kwota
+            self.zgoda_na_kredyt = True
             return True
         else:
             return False
