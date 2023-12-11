@@ -8,7 +8,7 @@ from ..KontoFirmowe import KontoFirmowe
 class TestLoans(unittest.TestCase):
     personal_data = {
         "name" : "Firma",
-        "nip" : "1234567890"
+        "nip" : "8461627563"
     }
 
     @parameterized.expand([

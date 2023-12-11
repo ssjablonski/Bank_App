@@ -4,16 +4,16 @@ from ..KontoFirmowe import KontoFirmowe
 
 class TestCreateBankAccount(unittest.TestCase):
     nazwafirmy = "Biedronka"
-    NIP = "1234567890"
+    NIP = "8461627563"
 
     def test_creating_account(self):
         konto = KontoFirmowe(self.nazwafirmy, self.NIP)
         self.assertEqual(konto.nazwa_firmy, "Biedronka", "Nazwa firmy nie została zapisana!")
-        self.assertEqual(konto.NIP, "1234567890", "NIP nie został zapisany!")
+        self.assertEqual(konto.NIP, "8461627563", "NIP nie został zapisany!")
         self.assertEqual(konto.saldo, 0, "Saldo nie jest zerowe!")
 
     def test_creating_account_with_incorrect_NIP(self):
-        konto = KontoFirmowe(self.nazwafirmy, "12345678901")
+        konto = KontoFirmowe(self.nazwafirmy, "84616275631")
         self.assertEqual(konto.nazwa_firmy, "Biedronka", "Nazwa firmy nie została zapisana!")
         self.assertEqual(konto.NIP, "Niepoprawny NIP!", "NIP nie został zapisany!")
         self.assertEqual(konto.saldo, 0, "Saldo nie jest zerowe!")

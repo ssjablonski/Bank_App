@@ -32,18 +32,18 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(pierwsze_konto.historia, [100,-120,-1,-2,50], "Historia nie jest poprawna")
 
     def test_history_firm_acount(self):
-        pierwsze_konto = KontoFirmowe("firma", "1234567890")
+        pierwsze_konto = KontoFirmowe("firma", "8461627563")
         pierwsze_konto.zaksieguj_przelew_przychodzacy(100)
         self.assertEqual(pierwsze_konto.historia, [100], "Historia nie jest poprawna")
 
     def test_history_firm_account_express(self):
-        pierwsze_konto = KontoFirmowe("firma", "1234567890")
+        pierwsze_konto = KontoFirmowe("firma", "8461627563")
         pierwsze_konto.saldo = 200
         pierwsze_konto.zaksieguj_przelew_ekspresowy(100)
         self.assertEqual(pierwsze_konto.historia, [-100, -5], "Historia nie jest poprawna")
 
     def test_history_firm_account_series_of_transfers(self):
-        pierwsze_konto = KontoFirmowe("firma", "1234567890")
+        pierwsze_konto = KontoFirmowe("firma", "8461627563")
         pierwsze_konto.saldo = 200
         pierwsze_konto.zaksieguj_przelew_przychodzacy(100)
         pierwsze_konto.zaksieguj_przelew_ekspresowy(120)
