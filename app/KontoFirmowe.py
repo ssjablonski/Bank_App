@@ -4,7 +4,6 @@ import requests
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
 
 class KontoFirmowe(Konto):
     def __init__(self, nazwa_firmy, NIP):

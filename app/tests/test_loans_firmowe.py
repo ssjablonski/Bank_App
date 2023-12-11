@@ -3,7 +3,7 @@ from parameterized import parameterized
 from ..Konto import Konto
 from ..KontoOsobiste import KontoOsobiste
 from ..KontoFirmowe import KontoFirmowe
-
+from unittest.mock import patch
 
 class TestLoans(unittest.TestCase):
     personal_data = {
@@ -18,7 +18,9 @@ class TestLoans(unittest.TestCase):
             ([-100,100,100,-1775], 250, 400, False),
             ([-100,100,100,1775], 250, 400, False),
         ])
-    def test_loan_firm(self,historia, kwota_kredytu, saldo, oczekwiany_wynik):
+    @patch("requests.get")
+    def test_loan_firm(self,historia, kwota_kredytu, saldo, oczekwiany_wynik, mock_request_get):
+        mock_request_get.return_value.status_code = 200
         konto=KontoFirmowe(self.personal_data["name"], self.personal_data["nip"])
         konto.historia = historia
         konto.saldo = saldo
