@@ -44,4 +44,4 @@ class KontoFirmowe(Konto):
     def wyslij_historie_na_maila(self, adresat, smtp_connection):
         tresc = f"Historia konta Twojej firmy to: {self.historia}"
         temat = f"Wyciąg z dnia {datetime.today().strftime('%Y-%m-%d')}"
-        return smtp_connection.wyslij(temat, tresc, adresat)
+        return smtp_connection.wyslij(temat, tresc, adresat)   
