@@ -44,7 +44,3 @@ class RejestrKont():
         cls.collection.delete_many({})
         for konto in cls.lista:
             cls.collection.insert_one({"imie": konto.imie, "nazwisko": konto.nazwisko, "pesel": konto.pesel, "saldo": konto.saldo, "historia": konto.historia})
-
-    @classmethod
-    def delete(cls):
-        cls.collection.delete_many({})
