@@ -20,6 +20,11 @@ def stworz_konto():
 def ile_kont():
     return jsonify({"count": RejestrKont.ile_kont()}), 200
 
+@app.route("/api/accounts", methods=['DELETE'])
+def usun_wszystko():
+    RejestrKont.delete()
+    return jsonify({"message": "Usunięto wszystkie konta"}), 200
+    
 
 @app.route("/api/accounts/<pesel>", methods=['GET'])
 def wyszukaj_konto_z_peselem(pesel):

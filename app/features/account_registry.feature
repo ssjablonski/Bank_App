@@ -25,10 +25,10 @@ Feature: Account registry
    Then Account with pesel "17594942759" does not exists in registry
 
 
- Scenario: User is able to update last name saved in account
+ Scenario: User is able to update first name saved in account
    Given Account with pesel "84100581195" exists in registry
-   When I update last name in account with pesel "84100581195" to "smith"
-   Then Last name in account with pesel "84100581195" is "smith"
+   When I update first name in account with pesel "84100581195" to "janek"
+   Then First name in account with pesel "84100581195" is "janek"
 
 
  Scenario: User is able to load account registry
