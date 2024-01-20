@@ -39,5 +39,5 @@ jobs:
         docker compose -f mongo.yml up -d
     - name: Test with unittest
       run: |
-        python -m unittest app/api_test -p '*_test.py'
+        python -m unittest discover -s app/api_test -p '*_test.py'
 
