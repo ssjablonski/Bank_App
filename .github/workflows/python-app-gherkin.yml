@@ -39,4 +39,5 @@ jobs:
         docker compose -f mongo.yml up -d
     - name: Test with gherkin
       run: |
-        behave app
+        cd app
+        behave
