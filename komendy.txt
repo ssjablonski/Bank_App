@@ -6,3 +6,6 @@ flask --app app/api.py --debug run
 python -m flask --app api.py run
 
 python -m unittest app/api_test/account_crud.py
+
+docker compose -f mongo.yml up
+

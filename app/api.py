@@ -78,3 +78,14 @@ def wykonaj_przelew(pesel):
                 konto.zaksieguj_przelew_wychodzacy(int(dane["amount"]))
                 return jsonify({"message": "Przelew wykonany"}), 200        
         return jsonify({"message": "Przelew przyjęto do realizacji"}), 400
+    
+@app.route("/api/accounts/save", methods=["PATCH"])
+def zapisz_do_bazy():
+    RejestrKont.save()
+    return jsonify({"message": "Zapisano do bazy"}), 200
+
+@app.route("/api/accounts/load", methods=["PATCH"])
+def wczytaj_z_bazy():
+    RejestrKont.load()
+    ile = RejestrKont.ile_kont()
+    return jsonify({"message": f"Załadowano konta. Liczba konta załadowanych: {ile}"}), 200
