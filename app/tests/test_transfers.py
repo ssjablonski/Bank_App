@@ -2,7 +2,7 @@ import unittest
 from ..Konto import Konto
 from ..KontoOsobiste import KontoOsobiste
 from ..KontoFirmowe import KontoFirmowe
-
+from unittest.mock import patch
 
 class TestTransfer(unittest.TestCase):
     personal_data = {
@@ -61,9 +61,10 @@ class TestTransfer(unittest.TestCase):
         pierwsze_konto.zaksieguj_przelew_ekspresowy(50)
         self.assertEqual(pierwsze_konto.saldo, 100-50-1, "Saldo nie jest poprawne")
 
-    
-    def test_express_firm_acount(self):
-        pierwsze_konto = KontoFirmowe("firma", "1234567890")
+    @patch("requests.get")
+    def test_express_firm_acount(self, mock_request_get):
+        mock_request_get.return_value.status_code = 200
+        pierwsze_konto = KontoFirmowe("firma", "8461627563")
         pierwsze_konto.saldo = 100
         pierwsze_konto.zaksieguj_przelew_ekspresowy(50)
         self.assertEqual(pierwsze_konto.saldo, 100-50-5, "Saldo nie jest poprawne")

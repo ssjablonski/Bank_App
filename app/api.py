@@ -2,9 +2,6 @@ from flask import Flask, request, jsonify
 from app.RejestrKont import RejestrKont
 from app.KontoOsobiste import KontoOsobiste
 
-
-
-
 app = Flask(__name__)
 
 
@@ -12,9 +9,12 @@ app = Flask(__name__)
 def stworz_konto():
    dane = request.get_json()
    print(f"Request o stworzenie konta z danymi: {dane}")
-   konto = KontoOsobiste(dane["imie"], dane["nazwisko"], dane["pesel"])
-   RejestrKont.dodaj_konto(konto)
-   return jsonify({"message": "Konto stworzone"}), 201
+   if RejestrKont.znajdz_konto(dane["pesel"]) == None:
+    konto = KontoOsobiste(dane["imie"], dane["nazwisko"], dane["pesel"])
+    RejestrKont.dodaj_konto(konto)
+    return jsonify({"message": "Konto stworzone"}), 201
+   else:
+       return jsonify({"message": "Istnieje konto z tym peselem"}), 409
 
 @app.route("/api/accounts/count", methods=['GET'])
 def ile_kont():
@@ -63,4 +63,18 @@ def usun_konto_z_peselem(pesel):
         RejestrKont.usun_konto(pesel)
         return jsonify({"message": "Konto zostało usunięte"}), 200
     
-    
+@app.route("/api/accounts/<pesel>/transfer", methods=["POST"])
+def wykonaj_przelew(pesel):
+    konto = RejestrKont.znajdz_konto(pesel)
+    if konto is None:
+        return jsonify({"message": "Nie znaleziono konta"}), 404
+    else:
+        dane = request.get_json()
+        if ("amount" and "type") in dane:
+            if dane["type"] == "incoming":
+                konto.zaksieguj_przelew_przychodzacy(int(dane["amount"]))
+                return jsonify({"message": "Przelew wykonany"}), 200
+            elif dane["type"] == "outgoing":
+                konto.zaksieguj_przelew_wychodzacy(int(dane["amount"]))
+                return jsonify({"message": "Przelew wykonany"}), 200        
+        return jsonify({"message": "Przelew przyjęto do realizacji"}), 400
