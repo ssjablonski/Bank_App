@@ -9,3 +9,5 @@ python -m unittest app/api_test/account_crud.py
 
 docker compose -f mongo.yml up
 
+gherkin (trzeba byc w app)  behave
+

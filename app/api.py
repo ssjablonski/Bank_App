@@ -20,7 +20,6 @@ def stworz_konto():
 def ile_kont():
     return jsonify({"count": RejestrKont.ile_kont()}), 200
 
-
 @app.route("/api/accounts/<pesel>", methods=['GET'])
 def wyszukaj_konto_z_peselem(pesel):
     konto = RejestrKont.znajdz_konto(pesel)
