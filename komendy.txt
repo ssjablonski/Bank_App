@@ -1,0 +1,8 @@
+python -m coverage run -m unittest
+python -m coverage report
+python -m coverage html
+
+flask --app app/api.py --debug run
+python -m flask --app api.py run
+
+python -m unittest app/api_test/account_crud.py

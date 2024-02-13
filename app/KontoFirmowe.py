@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime, date
 from .Konto import Konto
 import requests
 import os
@@ -40,3 +40,8 @@ class KontoFirmowe(Konto):
             return True
         print(False)
         return False
+    
+    def wyslij_historie_na_maila(self, adresat, smtp_connection):
+        tresc = f"Historia konta Twojej firmy to: {self.historia}"
+        temat = f"Wyciąg z dnia {datetime.today().strftime('%Y-%m-%d')}"
+        return smtp_connection.wyslij(temat, tresc, adresat)
